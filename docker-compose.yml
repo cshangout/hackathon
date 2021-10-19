@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  web:
+    build: server/
+    ports:
+      - "8080:8080"
+    networks:
+      - hack_network
+    env_file:
+      - .env
+    depends_on:
+      - rethinkdb
+    restart: always
+  rethinkdb:
+    image: rethinkdb:latest
+    volumes:
+      - rethink-data:/data
+    networks:
+      - hack_network
+    ports:
+      - "28015:28015"
+      # Comment the next line to disable web access to rethinkdb
+      - "8081:8080"
+    restart: always
+
+networks:
+  hack_network:
+volumes:
+  rethink-data:
