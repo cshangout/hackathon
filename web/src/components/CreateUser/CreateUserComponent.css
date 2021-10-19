@@ -1,0 +1,12 @@
+.createUser {
+    padding: 5px 20px;
+}
+.createUser form {
+    border: 1px;
+    border-style: dashed;
+}
+
+.createUser fieldset {
+    margin: 20px 0;
+}
+
