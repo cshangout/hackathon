@@ -23,6 +23,7 @@ function CreateUserComponent() {
             body: JSON.stringify(formData)
         };
 
+        // TODO: The server location should be loaded from the environment files.
         fetch('http://localhost:8080/v1/users', requestOptions)
             .then(response => response.json())
             .then(data => {
