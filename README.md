@@ -4,6 +4,8 @@ Basic (for now) web application for hosting and managing hackathons and game jam
 
 ## The Stack
 
-Front End: Javascript + React 
+Front End: Javascript + React
+
 Back End: Golang + Gin Framework
+
 Database: RethinkDB
