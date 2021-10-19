@@ -14,18 +14,21 @@ func main() {
 func Run() {
 
 	// Database settings
-	useHost := os.Getenv("DB_USE_HOST")
 
-	databaseName := os.Getenv("DB_NAME")
-	if useHost == "1" {
+	database.Config.DatabaseName = os.Getenv("DB_NAME")
+	database.Config.UseHost = os.Getenv("DB_USE_HOST") == "1"
+
+
+	if database.Config.UseHost {
 		databaseHost := os.Getenv("DB_HOST")
 		databasePort := os.Getenv("DB_PORT")
-		database.Session = database.Init(databaseName, fmt.Sprintf("%s:%s", databaseHost, databasePort))
+		database.Config.DatabaseURL = fmt.Sprintf("%s:%s", databaseHost, databasePort)
 	} else {
 		containerName := os.Getenv("DB_CONTAINER_NAME")
-		database.Session = database.Init(databaseName, containerName)
+		database.Config.DatabaseURL = containerName
 	}
 
+	database.Session = database.Init()
 	// Set up routes
 	r := routes.SetupRouter()
 

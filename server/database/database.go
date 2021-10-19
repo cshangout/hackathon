@@ -5,6 +5,13 @@ import (
 	"log"
 )
 
+type databaseConfig struct {
+	UseHost bool
+	DatabaseName string
+	DatabaseURL string
+}
+
+var Config databaseConfig
 var Session *r.Session
 
 func getTableDefinitions() map[string]interface{} {
@@ -13,18 +20,18 @@ func getTableDefinitions() map[string]interface{} {
 	}
 }
 
-func Init(db string, url string) *r.Session {
+func Init() *r.Session {
 	var err error
 
 	session, err := r.Connect(r.ConnectOpts{
-		Address: url,
+		Address: Config.DatabaseURL,
 	})
 
 	if err != nil {
 		log.Fatalln("Failed to connect to rethinkDB: ", err)
 	}
 
-	setupDatabase(db, session)
+	setupDatabase(Config.DatabaseName, session)
 	return session
 }
 
