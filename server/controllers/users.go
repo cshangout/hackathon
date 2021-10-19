@@ -7,11 +7,14 @@ import (
 )
 
 func GetUsers(c *gin.Context) {
-	//var users []models.User
-	c.JSON(200, gin.H {
-		"message": "pong",
-	})
-	//c.JSON(http.StatusOK, gin.H{"data": users})
+	users, err := models.GetAllUsers()
+
+	if err != nil {
+		c.AbortWithStatus(http.StatusInternalServerError)
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": users})
 }
 
 func GetUser(c *gin.Context) {
@@ -26,7 +29,7 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
-	newUser, err := user.NewUser()
+	newUser, err := models.NewUser(user)
 	if err != nil {
 		c.AbortWithStatus(http.StatusBadRequest)
 		return

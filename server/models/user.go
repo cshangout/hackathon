@@ -1,6 +1,7 @@
 package models
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/mauville-technologies/hackathon/server/database"
@@ -14,7 +15,33 @@ type User struct {
 	Password string `rethinkdb:"password" json:"password"`
 }
 
-func (u *User) NewUser() (*User, error) {
+func (u *User) MarshalJSON() ([]byte, error) {
+	type Alias User
+	return json.Marshal(&struct {
+		Password string `json:"password,omitempty"`
+		*Alias
+	}{
+		Password: "",
+		Alias:    (*Alias)(u),
+	})
+}
+func GetAllUsers() ([]User, error) {
+	users := &[]User{}
+
+	resp, err := r.DB(database.Config.DatabaseName).Table("users").Run(database.Session)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if err = resp.All(users); err != nil {
+		return nil, err
+	}
+
+	return *users, nil
+}
+
+func NewUser(u User) (*User, error) {
 	// TODO: check for conflict
 
 	// TODO: hash the password
@@ -47,5 +74,5 @@ func (u *User) NewUser() (*User, error) {
 		return nil, err
 	}
 
-	return u, nil
+	return &u, nil
 }
