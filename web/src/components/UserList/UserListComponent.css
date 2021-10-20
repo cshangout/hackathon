@@ -1,0 +1,8 @@
+.userListComponent {
+    width: 50%;
+}
+
+.userContainer {
+    display: flex;
+    justify-content: space-between;
+}

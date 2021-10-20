@@ -1,4 +1,5 @@
 import React, {useState, useReducer} from "react";
+import { Constants } from "../../config/globals";
 import './CreateUserComponent.css'
 
 const formReducer = (state, event) => {
@@ -24,7 +25,7 @@ function CreateUserComponent() {
         };
 
         // TODO: The server location should be loaded from the environment files.
-        fetch('http://localhost:8080/v1/users', requestOptions)
+        fetch(`${Constants.SERVER}:${Constants.PORT}${Constants.API_VERSION}${Constants.USERS_ENDPOINT}`, requestOptions)
             .then(response => response.json())
             .then(data => {
                console.log('New user: ');
@@ -56,7 +57,7 @@ function CreateUserComponent() {
                 <fieldset>
                     <label>
                         <span>Password: </span>
-                        <input name="password" onChange={handleChange}/>
+                        <input type="password" name="password" onChange={handleChange}/>
                     </label>
                 </fieldset>
                 <button type="submit">Create User</button>
