@@ -3,6 +3,7 @@ import React, {useState, useEffect} from "react"
 import UserComponent from "./UserComponent";
 
 import { Constants } from "../../config/globals";
+import CreateUserComponent from "./CreateUser/CreateUserComponent";
 
 function UserListComponent(props) {
     const [users, setUsers] = useState([]);
@@ -11,7 +12,8 @@ function UserListComponent(props) {
         return fetch(`${Constants.SERVER}:${Constants.PORT}${Constants.API_VERSION}${Constants.USERS_ENDPOINT}`)
             .then(data => data.json());
     }
-    useEffect(() => {
+
+    const refreshPage = () => {
         let mounted = true;
         getUsers().then(users => {
             if (mounted) {
@@ -19,14 +21,21 @@ function UserListComponent(props) {
             }
         })
         return () => mounted = false;
-    });
+    }
+
+    useEffect(() => {
+        refreshPage();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const usersComponents = users.map((user) => {
-        return <li className="list-group-item" id={user.id}> <UserComponent user={user} /> </li>;
+        return <li className="list-group-item" key={user.id}> <UserComponent user={user} actionCallback={refreshPage} /> </li>;
     })
 
     return (
         <div className="userListComponent">
+            <CreateUserComponent actionCallback={refreshPage}/>
+
             <ul className="list-group">
                 {usersComponents}
             </ul>

@@ -1,5 +1,5 @@
 import React, {useState, useReducer} from "react";
-import { Constants } from "../../config/globals";
+import { Constants } from "../../../config/globals";
 import './CreateUserComponent.css'
 
 const formReducer = (state, event) => {
@@ -8,7 +8,7 @@ const formReducer = (state, event) => {
         [event.name]: event.value
     };
 }
-function CreateUserComponent() {
+function CreateUserComponent(props) {
     const [formData, setFormData] = useReducer(formReducer, {}, ()=>{});
     const [submitting, setSubmitting] = useState(false);
 
@@ -30,6 +30,7 @@ function CreateUserComponent() {
             .then(data => {
                console.log('New user: ');
                console.log(data);
+               props.actionCallback();
                setSubmitting(false);
             });
 
@@ -43,25 +44,23 @@ function CreateUserComponent() {
     }
 
     return (
-        <div className="createUser">
-            { submitting &&
-                <div>Submitting Form...</div>
-            }
-            <form onSubmit={handleSubmit}>
-                <fieldset>
-                    <label>
+        <div className="createUserComponent">
+            <div className="createUser">
+                { submitting &&
+                    <div>Submitting Form...</div>
+                }
+                <form onSubmit={handleSubmit}>
+                    <fieldset>
                         <span>Username: </span>
                         <input name="username" onChange={handleChange}/>
-                    </label>
-                </fieldset>
-                <fieldset>
-                    <label>
+                    </fieldset>
+                    <fieldset>
                         <span>Password: </span>
                         <input type="password" name="password" onChange={handleChange}/>
-                    </label>
-                </fieldset>
-                <button type="submit">Create User</button>
-            </form>
+                    </fieldset>
+                    <button type="submit">Create User</button>
+                </form>
+            </div>
         </div>
     )
 }

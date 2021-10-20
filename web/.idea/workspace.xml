@@ -2,13 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd02eefd-66fe-49ee-ad63-b391fccce6b3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/UserList/UserComponent.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UserList/UserListComponent.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UserList/UserListComponent.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/config/globals.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.env" beforeDir="false" afterPath="$PROJECT_DIR$/../.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/controllers/users.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/controllers/users.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/models/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/models/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/routes/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/routes/routes.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CreateUser/CreateUserComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CreateUser/CreateUserComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CreateUser/CreateUserComponent.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UserList/CreateUser/CreateUserComponent.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CreateUser/CreateUserComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UserList/CreateUser/CreateUserComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/UserList/UserComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UserList/UserComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/UserList/UserListComponent.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UserList/UserListComponent.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/UserList/UserListComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UserList/UserListComponent.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +46,11 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ozzadar\Documents\hackathon\web\src\components\UserList" />
+    </key>
   </component>
   <component name="RunManager" selected="npm.start">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -81,7 +90,7 @@
       <updated>1634616489025</updated>
       <workItem from="1634616490857" duration="4076000" />
       <workItem from="1634695423092" duration="177000" />
-      <workItem from="1634696018299" duration="2473000" />
+      <workItem from="1634696018299" duration="7259000" />
     </task>
     <servers />
   </component>

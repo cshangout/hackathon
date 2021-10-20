@@ -76,3 +76,32 @@ func NewUser(u User) (*User, error) {
 
 	return &u, nil
 }
+
+func DeleteUser(id string) (error) {
+	resp, err := r.DB(database.Config.DatabaseName).Table("users").Get(id).Delete().RunWrite(database.Session)
+
+	if err != nil || resp.Deleted < 1 {
+		return errors.New("user doesn't exist")
+	}
+
+	return nil
+}
+
+func FindUserByID(id string) (*User, error) {
+
+	resp, err := r.DB(database.Config.DatabaseName).Table("users").Get(id).Run(database.Session)
+
+	if err != nil {
+		return nil, err
+	}
+
+	user := &User{}
+
+	err = resp.One(user)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}

@@ -1,5 +1,6 @@
 .userListComponent {
-    width: 50%;
+    width: 100%;
+    padding: 5px 20px;
 }
 
 .userContainer {

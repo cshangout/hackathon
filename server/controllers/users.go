@@ -43,5 +43,13 @@ func UpdateUser(c *gin.Context) {
 }
 
 func DeleteUser(c *gin.Context) {
+	id := c.Param("id")
 
+	err := models.DeleteUser(id)
+
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	}
+
+	c.JSON(http.StatusOK, nil)
 }

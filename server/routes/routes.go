@@ -11,8 +11,10 @@ func SetupRouter() *gin.Engine {
 
 	r.Use(cors.New(cors.Config{
 		AllowAllOrigins: true,
+		AllowMethods: []string{"GET", "PUT", "POST", "DELETE"},
 		AllowHeaders: []string{"Content-Type"},
 	}))
+
 	v1 := r.Group("/v1")
 	{
 		v1.GET("users", controllers.GetUsers)
