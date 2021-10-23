@@ -3,7 +3,6 @@ import React, {useState, useEffect} from "react"
 import UserComponent from "./UserComponent";
 
 import { Constants } from "../../config/globals";
-import CreateUserComponent from "./CreateUser/CreateUserComponent";
 
 function UserListComponent(props) {
     const [users, setUsers] = useState([]);
@@ -34,8 +33,6 @@ function UserListComponent(props) {
 
     return (
         <div className="userListComponent">
-            <CreateUserComponent actionCallback={refreshPage}/>
-
             <ul className="list-group">
                 {usersComponents}
             </ul>

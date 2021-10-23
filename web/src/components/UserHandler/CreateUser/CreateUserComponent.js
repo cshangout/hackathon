@@ -1,6 +1,6 @@
-import React, {useState, useReducer} from "react";
-import { Constants } from "../../../config/globals";
+import React, {useState, useReducer, useContext} from "react";
 import './CreateUserComponent.css'
+import AuthContext from "../../../store/auth/auth-store";
 
 const formReducer = (state, event) => {
     return {
@@ -12,27 +12,20 @@ function CreateUserComponent(props) {
     const [formData, setFormData] = useReducer(formReducer, {}, ()=>{});
     const [submitting, setSubmitting] = useState(false);
 
+    const authContext = useContext(AuthContext);
+
     const handleSubmit = event => {
         event.preventDefault();
         console.log(formData);
 
         setSubmitting(true);
 
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        };
 
+
+        authContext.createUser(formData)
         // TODO: The server location should be loaded from the environment files.
-        fetch(`${Constants.SERVER}:${Constants.PORT}${Constants.API_VERSION}${Constants.USERS_ENDPOINT}`, requestOptions)
-            .then(response => response.json())
-            .then(data => {
-               console.log('New user: ');
-               console.log(data);
-               props.actionCallback();
-               setSubmitting(false);
-            });
+
+
 
     }
 
@@ -50,14 +43,8 @@ function CreateUserComponent(props) {
                     <div>Submitting Form...</div>
                 }
                 <form onSubmit={handleSubmit}>
-                    <fieldset>
-                        <span>Username: </span>
-                        <input name="username" onChange={handleChange}/>
-                    </fieldset>
-                    <fieldset>
-                        <span>Password: </span>
-                        <input type="password" name="password" onChange={handleChange}/>
-                    </fieldset>
+                    <input name="username" placeholder="username" onChange={handleChange}/>
+                    <input type="password" placeholder="password" name="password" onChange={handleChange}/>
                     <button type="submit">Create User</button>
                 </form>
             </div>
