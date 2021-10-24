@@ -4,6 +4,7 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/mauville-technologies/hackathon/server/controllers"
+	"github.com/mauville-technologies/hackathon/server/middleware"
 )
 
 func SetupRouter() *gin.Engine {
@@ -22,6 +23,10 @@ func SetupRouter() *gin.Engine {
 		v1.POST("users", controllers.CreateUser)
 		v1.PUT("users/:id", controllers.UpdateUser)
 		v1.DELETE("users/:id", controllers.DeleteUser)
+
+		v1.POST("login", controllers.Login)
+
+		v1.GET("restricted", middleware.AuthorizeJWT(), controllers.RestrictedArea)
 	}
 	return r
 }

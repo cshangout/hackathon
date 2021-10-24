@@ -105,3 +105,11 @@ func FindUserByID(id string) (*User, error) {
 
 	return user, nil
 }
+
+func LoginUser(user User) (*User, error) {
+	loggedInUser := &User{
+		Username: user.Username,
+	}
+
+	return loggedInUser, nil
+}
