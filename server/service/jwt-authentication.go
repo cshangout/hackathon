@@ -2,11 +2,10 @@ package service
 
 import (
 	"fmt"
+	"github.com/golang-jwt/jwt"
 	"github.com/mauville-technologies/hackathon/server/models"
 	"os"
 	"time"
-
-	"github.com/dgrijalva/jwt-go"
 )
 
 //jwt service
