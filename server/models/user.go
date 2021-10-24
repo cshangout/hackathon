@@ -68,6 +68,12 @@ func NewUser(u User) (*User, error) {
 	}
 
 	u.ID = uuid
+	pw, err := HashPassword(u.Password)
+	if err != nil {
+		return nil, err
+	}
+
+	u.Password = string(pw)
 	resp, err := r.DB(database.Config.DatabaseName).Table("users").Insert(u).RunWrite(database.Session)
 
 	if err != nil || resp.Inserted < 1 {
@@ -106,10 +112,33 @@ func FindUserByID(id string) (*User, error) {
 	return user, nil
 }
 
-func LoginUser(user User) (*User, error) {
-	loggedInUser := &User{
-		Username: user.Username,
+func FindUserByUsername(username string) (*User, error) {
+	resp, err := r.DB(database.Config.DatabaseName).Table("users").Filter(r.Row.Field("username").Eq(username)).Run(database.Session)
+
+	if err != nil {
+		return nil, err
 	}
 
-	return loggedInUser, nil
+	user := &User{}
+
+	err = resp.One(user)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}
+
+func LoginUser(user User) (*User, error) {
+
+	existingUser, err := FindUserByUsername(user.Username)
+	if err != nil {
+		return nil, errors.New("USER_NOT_EXIST")
+	}
+
+	if err = VerifyPassword(existingUser.Password, user.Password); err != nil {
+		return nil, errors.New("INVALID_PASSWORD")
+	}
+	return existingUser, nil
 }
