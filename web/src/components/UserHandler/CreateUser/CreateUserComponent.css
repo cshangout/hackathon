@@ -1,7 +1,18 @@
-.createUser input {
-    width: 30%;
-}
-.createUser button {
-    width: 33%;
+.createUser {
+    display: flex;
+    justify-content: space-around;
 }
 
+.createUser-content {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.createUser-content div input {
+    flex-grow: 0;
+    width: 10rem;
+}
+.createUser-content div button {
+    flex-grow: 0;
+    width: 7rem;
+}

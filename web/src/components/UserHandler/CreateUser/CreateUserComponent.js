@@ -37,17 +37,20 @@ function CreateUserComponent(props) {
     }
 
     return (
-        <div className="createUserComponent">
-            <div className="createUser">
-                { submitting &&
-                    <div>Submitting Form...</div>
-                }
-                <form onSubmit={handleSubmit}>
+        <div className="createUser">
+            { submitting &&
+                <div>Submitting Form...</div>
+            }
+            <form className="createUser-content" onSubmit={handleSubmit}>
+                <div >
                     <input name="username" placeholder="username" onChange={handleChange}/>
                     <input type="password" placeholder="password" name="password" onChange={handleChange}/>
-                    <button type="submit">Create User</button>
-                </form>
-            </div>
+                </div>
+                <div>
+                    <button type="submit" className="btn-outline-secondary">Create User</button>
+                    <button className="btn-outline-secondary" onClick={props.register}>Cancel</button>
+                </div>
+            </form>
         </div>
     )
 }
