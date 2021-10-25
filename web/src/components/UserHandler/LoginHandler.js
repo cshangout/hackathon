@@ -10,11 +10,20 @@ function LoginHandler(props) {
     const [creatingUser, setCreatingUser] = useState(false);
 
     console.log(authContext)
+    const createUser = (event) => {
+        event.preventDefault();
+        setCreatingUser(!creatingUser);
+    }
+
     return (
         <div className="d-flex loginHandler text-light">
-            { creatingUser ? <CreateUserComponent />
-                : !authContext.userDetails.loggedIn ? <LoginComponent/> :
-                    <div> Logged In </div>
+            { creatingUser ? <CreateUserComponent register={createUser} />
+                : <div> { !authContext.userDetails.loggedIn ? <LoginComponent register={createUser}/> :
+                    <div>
+                        <span>Welcome, { authContext.userDetails.username }!</span>
+                        <a onClick={authContext.logOut}> Log out </a>
+                    </div> }
+                </div>
             }
         </div>
     )

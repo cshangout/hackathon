@@ -1,0 +1,18 @@
+.loginForm {
+    display: flex;
+    justify-content: space-around;
+}
+
+.loginForm-content {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.loginForm-content div input {
+    flex-grow: 0;
+    width: 10rem;
+}
+.loginForm-content div button {
+    flex-grow: 0;
+    width: 7rem;
+}
