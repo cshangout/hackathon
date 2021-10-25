@@ -19,7 +19,10 @@ function LoginHandler(props) {
         <div className="d-flex loginHandler text-light">
             { creatingUser ? <CreateUserComponent register={createUser} />
                 : <div> { !authContext.userDetails.loggedIn ? <LoginComponent register={createUser}/> :
-                    <div> Logged In </div> }
+                    <div>
+                        <span>Welcome, { authContext.userDetails.username }!</span>
+                        <a onClick={authContext.logOut}> Log out </a>
+                    </div> }
                 </div>
             }
         </div>
