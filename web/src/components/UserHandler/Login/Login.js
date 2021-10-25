@@ -18,6 +18,7 @@ function LoginComponent(props) {
         })
     }
     const handleSubmit = (event) => {
+        event.preventDefault();
         authContext.logIn(formData);
     };
 
