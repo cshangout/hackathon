@@ -1,6 +1,7 @@
 version: "3.9"
 services:
   web:
+    platform: linux/x86_64
     build: web/
     ports:
       - "80:80"
@@ -23,6 +24,7 @@ services:
       - rethinkdb
     restart: always
   rethinkdb:
+    platform: linux/x86_64
     image: rethinkdb:latest
     volumes:
       - rethink-data:/data
