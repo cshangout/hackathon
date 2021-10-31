@@ -9,7 +9,6 @@ function LoginHandler(props) {
     const authContext = useContext(AuthContext);
     const [creatingUser, setCreatingUser] = useState(false);
 
-    console.log(authContext)
     const createUser = (event) => {
         event.preventDefault();
         setCreatingUser(!creatingUser);
