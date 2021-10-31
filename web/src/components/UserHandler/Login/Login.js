@@ -1,6 +1,7 @@
 import React, {useContext, useReducer} from 'react';
 import AuthContext from "../../../store/auth/auth-store";
 import "./Login.css"
+import {useHistory, useParams} from "react-router-dom";
 const formReducer = (state, event) => {
     return {
         ...state,
@@ -10,6 +11,16 @@ const formReducer = (state, event) => {
 function LoginComponent(props) {
     const [formData, setFormData] = useReducer(formReducer, {}, ()=>{});
     const authContext = useContext(AuthContext);
+    const history = useHistory();
+    const params = useParams();
+
+    const completionCallback = (successful) => {
+        if (successful) {
+            if (history) {
+                history.push("/users");
+            }
+        }
+    }
 
     const handleChange = event => {
         setFormData({
@@ -19,7 +30,7 @@ function LoginComponent(props) {
     }
     const handleSubmit = (event) => {
         event.preventDefault();
-        authContext.logIn(formData);
+        authContext.logIn(formData, completionCallback);
     };
 
     return (

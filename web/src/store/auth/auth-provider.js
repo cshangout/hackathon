@@ -6,7 +6,7 @@ import jwt_decode from "jwt-decode";
 function AuthProvider(props) {
     const [userDetails, setUserDetails] = useState({loggedIn: false});
 
-    const logIn = (data) => {
+    const logIn = (data, completionCallback) => {
         const claims = jwt_decode(data);
         // Decode jwt
         setUserDetails({
@@ -15,17 +15,19 @@ function AuthProvider(props) {
             token: data
         });
 
+        completionCallback(true);
         // TODO: Save to cookie for future use.
     };
 
-    const logInFailed = (error) => {
+    const logInFailed = (error, completionCallback) => {
         console.log("Failed to log in.");
+        completionCallback(false);
     };
 
     return (
         <AuthContext.Provider value={{
             userDetails: userDetails,
-            logIn: (credentials) => {
+            logIn: (credentials, completionCallback) => {
                 const requestOptions = {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -35,9 +37,9 @@ function AuthProvider(props) {
                 fetch(`${Constants.SERVER}:${Constants.PORT}${Constants.API_VERSION}${Constants.LOGIN_ENDPOINT}`, requestOptions)
                     .then(response => {
                         if (response.status !== 200) {
-                            response.json().then(data => logInFailed(data))
+                            response.json().then(data => logInFailed(data, completionCallback));
                         } else {
-                            response.json().then(data => logIn(data))
+                            response.json().then(data => logIn(data, completionCallback));
                         }
                     })
             },
