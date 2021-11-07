@@ -3,7 +3,7 @@ import React from 'react'
 function PictureComponent(props) {
     return (
         <div>
-            I'm a picture!
+            <img src="someimage.gif"></img>
         </div>
     )
 }
